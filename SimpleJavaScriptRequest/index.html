@@ -3,10 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Хочу відправити запити</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script>
+        //Стоїть задача отримати курс валют private24
+        //для цього сервер private24 дає адресу по якій можна
+        //завантажити дані
+        //https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5
+        //Курс валю приходить у форматі json
+        //json - формат представлення інформації для обміну в мережі.
+        //Формат json дуже простий і легко читається людиною
+        //Основіні аспекти формату
+        // [] - це масив
+        // {} - це обєкт
+        //Наприклад
+        // {"name": "Іван", "age": 25}
+        //Це масив, який зберігає 2 значення
+        // [{"PIB": "Мельник І.В", "email": "m@i.ua"},
+        // {"PIB": "Бобер І.С", "email": "t@t.ss"}]
+
+        function handleClickButton() {
+            //console.log("Натиснули кнопку");
+            //На JavaScript придумали фукнцію fetch - відпрвка запиту
+            //Приват блокує по корсах
+            // const urlServer = "https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5"
+            const urlServer = "https://21-kn.itstep.click/api/Genres/Search";
+            fetch(urlServer)
+                .then(async res => //Буде запускати асинхроний метод до сервера.
+                {
+                    //Отримуємо json від сервера.
+                    const json = await res.json(); //асинхроно отримаємо результат, коли результат прийде
+                    console.log("server json = ", json);
+                });
+        }
+    </script>
 </head>
 <body>
 <main>
-    <h1>Привіт усім козака і козачкам :)</h1>
+    <h1 class="text-3xl font-bold text-center">Привіт усім козака і козачкам :)</h1>
+    <h2 class="text-2xl font-bold">Глобальна задача JavaScript - взаємодія із сервером</h2>
+
+    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        onclick="handleClickButton()">
+
+        Відправити запит на сервер
+    </button>
+
 </main>
 </body>
 </html>
